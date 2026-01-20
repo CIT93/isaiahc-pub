@@ -13,7 +13,7 @@ const handleButtonClick = function () {
         message += ' (Over Budget!)';
         totalDisplayElement.style.color = 'red';
     } else {
-        totalDisplayElement.style.color = 'black';
+        totalDisplayElement.style.color = 'green';
     }
     totalDisplayElement.textContent = message;
     console.log(`Item Added! Total Cost: $${totalCost}`);
