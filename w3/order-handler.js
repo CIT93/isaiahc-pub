@@ -26,3 +26,9 @@ export const getOrderInputs = function () {
         giftWrap: giftWrapInput.checked
     };
 };
+
+// Clears and resets the order form back to default values
+export const clearOrderForm = function () {
+    orderForm.reset();
+    qtyInput.value = 1;
+};
