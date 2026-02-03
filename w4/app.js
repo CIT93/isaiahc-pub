@@ -3,6 +3,8 @@ console.log('Hello from app.js! Your JavaScript is connected and running!');
 // Imports the order handler module that manages order form logic
 import * as orderHandler from './order-handler.js';
 import * as priceCalculator from './price-calculator.js';
+import * as resultsDisplay from './results-display.js';
+
 
 const orders = [];
 
@@ -26,6 +28,7 @@ const handleFormSubmit = function (event) {
         ...calculatedPrice,
         timestamp: new Date().toISOString()
     };
+    resultsDisplay.displayResults(newOrder);
 
     orders.push(newOrder);
 
