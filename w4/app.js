@@ -2,6 +2,10 @@ console.log('Hello from app.js! Your JavaScript is connected and running!');
 // step 1
 // Imports the order handler module that manages order form logic
 import * as orderHandler from './order-handler.js';
+import * as priceCalculator from './price-calculator.js';
+
+const orders = [];
+
 
 // References the main order form element
 const orderForm = document.getElementById('order-form');
@@ -15,15 +19,21 @@ const handleFormSubmit = function (event) {
 
     const orderData = orderHandler.getOrderInputs();
 
-    // Step 3 requirement: update the page
-    orderSummary.textContent = `Ordered ${orderData.qty} ${orderData.size} T-Shirt(s)${orderData.giftWrap ? ' with Gift Wrap' : ''}.`;
+    const calculatedPrice = priceCalculator.calculateTotal(orderData);
 
-    console.log(`Order Input - Object Literal:`);
-    console.log(`key of qty value of ${orderData.qty}`);
-    console.log(`key of size value of ${orderData.size}`);
-    console.log(`key of giftWrap value of ${orderData.giftWrap}`);
-    console.log(orderData);
+    const newOrder = {
+        ...orderData,
+        ...calculatedPrice,
+        timestamp: new Date().toISOString()
+    };
+
+    orders.push(newOrder);
+
+    console.log(orders);
+
+    orderHandler.clearOrderForm();
 };
+
 
 // Initializes the app and sets up all event listeners once the DOM is ready
 const init = function () {
