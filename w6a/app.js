@@ -21,10 +21,13 @@ const handleFormSubmit = function (event) {
 
     orders.push(newOrder);
 
+    orderStorage.saveOrders(orders);   // Step 5 line
+
     resultsDisplay.displayOrder(newOrder);
 
     orderHandler.clearOrderForm();
 };
+
 
 const init = function () {
 
