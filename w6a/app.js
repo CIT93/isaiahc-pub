@@ -1,5 +1,3 @@
-console.log('Hello from app.js! Your JavaScript is connected and running!');
-
 import * as orderHandler from './order-handler.js';
 import * as priceCalculator from './price-calculator.js';
 import * as resultsDisplay from './results-display.js';
@@ -12,7 +10,6 @@ const handleFormSubmit = function (event) {
     event.preventDefault();
 
     const orderData = orderHandler.getOrderInputs();
-
     const calculatedPrice = priceCalculator.calculateTotal(orderData);
 
     const newOrder = {
@@ -23,9 +20,7 @@ const handleFormSubmit = function (event) {
 
     orders.push(newOrder);
 
-    console.log(orders);
-
-    resultsDisplay.displayResults(newOrder);
+    resultsDisplay.displayOrder(newOrder);
 
     orderHandler.clearOrderForm();
 };
