@@ -1,6 +1,7 @@
 import * as orderHandler from './order-handler.js';
 import * as priceCalculator from './price-calculator.js';
 import * as resultsDisplay from './results-display.js';
+import * as orderStorage from './storage.js';
 
 const orders = [];
 
@@ -26,6 +27,16 @@ const handleFormSubmit = function (event) {
 };
 
 const init = function () {
+
+    const loadedOrders = orderStorage.loadOrders();
+
+    if (loadedOrders.length > 0) {
+        orders.push(...loadedOrders);
+        console.log('Orders loaded');
+    } else {
+        console.log('No orders found, starting fresh');
+    }
+
     console.log('App initialized: DOM is ready! Try submitting the form.');
     orderForm.addEventListener('submit', handleFormSubmit);
 };
