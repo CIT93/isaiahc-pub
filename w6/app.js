@@ -23,10 +23,15 @@ const handleFormSubmit = function (event) {
 
     orderStorage.saveOrders(orders);
 
-    // Render updated table
     orderList.renderOrders(orders);
 
     orderHandler.clearOrderForm();
+};
+
+const handleClearData = function () {
+    orders.length = 0;
+    orderStorage.saveOrders(orders);
+    orderList.renderOrders(orders);
 };
 
 const init = function () {
@@ -35,12 +40,12 @@ const init = function () {
 
     if (loadedOrders.length > 0) {
         orders.push(...loadedOrders);
-
-        // Render full list on startup
         orderList.renderOrders(orders);
     }
 
     orderForm.addEventListener('submit', handleFormSubmit);
+
+    orderList.setupClearButton(orders, handleClearData);
 };
 
 document.addEventListener('DOMContentLoaded', init);
