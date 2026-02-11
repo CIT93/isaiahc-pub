@@ -1,7 +1,7 @@
 import * as orderHandler from './order-handler.js';
 import * as priceCalculator from './price-calculator.js';
-import * as resultsDisplay from './results-display.js';
 import * as orderStorage from './storage.js';
+import * as orderList from './order-list.js';
 
 const orders = [];
 
@@ -21,7 +21,10 @@ const handleFormSubmit = function (event) {
 
     orders.push(newOrder);
 
-    resultsDisplay.displayOrder(newOrder);
+    orderStorage.saveOrders(orders);
+
+    // Render updated table
+    orderList.renderOrders(orders);
 
     orderHandler.clearOrderForm();
 };
@@ -32,10 +35,11 @@ const init = function () {
 
     if (loadedOrders.length > 0) {
         orders.push(...loadedOrders);
-        console.log('Orders loaded');
+
+        // Render full list on startup
+        orderList.renderOrders(orders);
     }
 
-    console.log('App initialized: DOM is ready! Try submitting the form.');
     orderForm.addEventListener('submit', handleFormSubmit);
 };
 
