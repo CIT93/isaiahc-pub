@@ -20,6 +20,7 @@ const handleFormSubmit = function (event) {
     };
 
     orders.push(newOrder);
+    orderStorage.saveOrders(orders);
 
     resultsDisplay.displayOrder(newOrder);
 
@@ -27,15 +28,12 @@ const handleFormSubmit = function (event) {
 };
 
 const init = function () {
-
     const loadedOrders = orderStorage.loadOrders();
 
     if (loadedOrders.length > 0) {
         orders.push(...loadedOrders);
-        console.log('Orders loaded');
     }
 
-    console.log('App initialized: DOM is ready! Try submitting the form.');
     orderForm.addEventListener('submit', handleFormSubmit);
 };
 
