@@ -105,22 +105,25 @@ const formatHomeSizeDisplay = function (homeSquareFootage, isApartment) {
 
 
 
+// BROKEN ON PURPOSE (Challenge 1 - Syntax Error)
 const createTableRow = function (entry) {
     const row = document.createElement('tr');
     row.dataset.id = entry.id;
+
     row.innerHTML = `
-        <td>${formatDateForDisplay(entry.timestamp)}</td>
-        <td>${entry.householdMembers}</td>
-        <td>${formatHomeSizeDisplay(entry.homeSquareFootage, entry.isApartment)}</td>
-        <td>${formatRadioValue(entry.dietType)}</td>
-        <td>${formatRadioValue(entry.foodPackaging)}</td>
-        <td>${entry.totalFootprint}</td>
-        <td class="action-cell">
-        <button class="action-button edit" data-id="${entry.id}">Edit</button>
-        <button class="action-button delete" data-id="${entry.id}">Delete</button>
-        </td>
-    `
-    return row
+    <td>${formatDateForDisplay(entry.timestamp)</td >
+    <td>${entry.householdMembers}</td>
+    <td>${formatHomeSizeDisplay(entry.homeSquareFootage, entry.isApartment)}</td>
+    <td>${formatRadioValue(entry.dietType)}</td>
+    <td>${formatRadioValue(entry.foodPackaging)}</td>
+    <td>${entry.totalFootprint}</td>
+    <td class="action-cell">
+      <button class="action-button edit" data-id="${entry.id}">Edit</button>
+      <button class="action-button delete" data-id="${entry.id}">Delete</button>
+    </td>
+    `;
+
+  return row;
 };
 
 
@@ -145,7 +148,7 @@ export const renderTable = function (entries, callbacks) {
     });
 
     for (const entry of sortedEntries) {
-        console.log(`${entry}`)
+        console.log(`${ entry } `)
         const rowElement = createTableRow(entry);
         footprintTableBody.appendChild(rowElement);
     };
