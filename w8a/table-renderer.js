@@ -111,7 +111,7 @@ const createTableRow = function (entry) {
     row.dataset.id = entry.id;
 
     row.innerHTML = `
-    <td>${formatDateForDisplay(entry.timestamp)</td >
+    <td>${formatDateForDisplay(entry.timestamp)}</td >
     <td>${entry.householdMembers}</td>
     <td>${formatHomeSizeDisplay(entry.homeSquareFootage, entry.isApartment)}</td>
     <td>${formatRadioValue(entry.dietType)}</td>
@@ -123,7 +123,7 @@ const createTableRow = function (entry) {
     </td>
     `;
 
-  return row;
+    return row;
 };
 
 
@@ -148,7 +148,7 @@ export const renderTable = function (entries, callbacks) {
     });
 
     for (const entry of sortedEntries) {
-        console.log(`${ entry } `)
+        console.log(`${entry} `)
         const rowElement = createTableRow(entry);
         footprintTableBody.appendChild(rowElement);
     };
