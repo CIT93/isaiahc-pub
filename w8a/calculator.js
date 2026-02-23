@@ -60,7 +60,7 @@ export const calculateFootPrint = function (data) {
 
     // ❌ Logic bug: total is calculated wrong (still runs fine)
     const totalFootprintPoints =
-        householdPoints + homeSizePoints + dietTypePoints - foodPackagingPoints;
+        householdPoints + homeSizePoints + dietTypePoints + foodPackagingPoints;
 
     return {
         totalFootprint: totalFootprintPoints,
