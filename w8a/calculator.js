@@ -51,13 +51,17 @@ const calculateHomeSizePoints = function (homeSquareFootage, isApartment) {
 // Calculate points for each category using our dedicated helper functions
 // This function orchestrates calls to the smaller, specialized calculation functions.
 
+// BROKEN ON PURPOSE (Challenge 3 - Logic Error)
 export const calculateFootPrint = function (data) {
-    // console.log('inside calculateFootPrint function in the calculator.js module');
     const householdPoints = calculateHouseholdPoints(data.householdMembers);
     const homeSizePoints = calculateHomeSizePoints(data.homeSquareFootage, data.isApartment);
-    const dietTypePoints = calculateFoodDietPoints(data.dietType)
+    const dietTypePoints = calculateFoodDietPoints(data.dietType);
     const foodPackagingPoints = calculateFoodPackagingPoints(data.foodPackaging);
-    const totalFootprintPoints = householdPoints + homeSizePoints + dietTypePoints + foodPackagingPoints;
+
+    // ❌ Logic bug: total is calculated wrong (still runs fine)
+    const totalFootprintPoints =
+        householdPoints + homeSizePoints + dietTypePoints - foodPackagingPoints;
+
     return {
         totalFootprint: totalFootprintPoints,
         householdFootprint: householdPoints,
