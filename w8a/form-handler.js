@@ -55,7 +55,7 @@ export const getFormInputs = function () {
     return {
         householdMembers: parseInt(householdMembersInput.value) || 1,
         // BROKEN ON PURPOSE (Challenge 2 - Type Error)
-        homeSquareFootage: homeSquareFootageInput.value.toFixed(0),
+        homeSquareFootage: parseInt(homeSquareFootageInput.value) || 0,
         isApartment: isApartmentInput.checked,
         dietType: getSelecedRadioValue(dietTypeRadios),
         foodPackaging: getSelecedRadioValue(foodPackagingRadios)
