@@ -1,15 +1,25 @@
 const orderTableBody = document.getElementById('order-table-body');
 const clearBtn = document.getElementById('clear-btn');
 
-const tableBody = document.getElementById('order-table-body');
+let moduleCallbacks = {};
 
-tableBody.addEventListener('click', function (event) {
+orderTableBody.addEventListener('click', function (event) {
     const target = event.target;
     const id = target.dataset.id;
 
     if (!id) return;
 
-    console.log("Clicked button with ID:", id);
+    if (target.classList.contains('delete-btn')) {
+        if (moduleCallbacks.onDelete) {
+            moduleCallbacks.onDelete(id);
+        }
+    }
+
+    if (target.classList.contains('edit-btn')) {
+        if (moduleCallbacks.onEdit) {
+            moduleCallbacks.onEdit(id);
+        }
+    }
 });
 
 let isConfirmingClear = false;
@@ -41,7 +51,9 @@ export const setupClearButton = function (orders, onConfirmClear) {
     });
 };
 
-export const renderOrders = function (orders) {
+export const renderOrders = function (orders, callbacks) {
+    moduleCallbacks = callbacks || {};
+
     orderTableBody.innerHTML = '';
 
     if (orders.length === 0) {
