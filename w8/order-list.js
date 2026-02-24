@@ -1,6 +1,17 @@
 const orderTableBody = document.getElementById('order-table-body');
 const clearBtn = document.getElementById('clear-btn');
 
+const tableBody = document.getElementById('order-table-body');
+
+tableBody.addEventListener('click', function (event) {
+    const target = event.target;
+    const id = target.dataset.id;
+
+    if (!id) return;
+
+    console.log("Clicked button with ID:", id);
+});
+
 let isConfirmingClear = false;
 let confirmTimeoutId = null;
 
