@@ -14,6 +14,7 @@ const handleFormSubmit = function (event) {
     const calculatedPrice = priceCalculator.calculateTotal(orderData);
 
     const newOrder = {
+        id: Date.now().toString(),
         ...orderData,
         ...calculatedPrice,
         timestamp: new Date().toISOString()
@@ -22,9 +23,7 @@ const handleFormSubmit = function (event) {
     orders.push(newOrder);
 
     orderStorage.saveOrders(orders);
-
     orderList.renderOrders(orders);
-
     orderHandler.clearOrderForm();
 };
 
