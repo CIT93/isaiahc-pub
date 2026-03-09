@@ -6,6 +6,9 @@ import * as orderList from './order-list.js';
 const orders = [];
 
 const orderForm = document.getElementById('order-form');
+const qtyInput = document.getElementById('qty');
+const giftWrapInput = document.getElementById('gift-wrap');
+const orderIdInput = document.getElementById('order-id');
 
 const handleDelete = function (id) {
     const indexToDelete = orders.findIndex(function (order) {
@@ -23,7 +26,17 @@ const handleDelete = function (id) {
 };
 
 const handleEdit = function (id) {
-    console.log("App.js: Requesting edit for order", id);
+    const orderToEdit = orders.find(function (order) {
+        return order.id === id;
+    });
+
+    if (orderToEdit) {
+        qtyInput.value = orderToEdit.qty;
+        document.querySelector('input[name="size"][value="' + orderToEdit.size + '"]').checked = true;
+        giftWrapInput.checked = orderToEdit.giftWrap;
+        orderIdInput.value = orderToEdit.id;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 };
 
 const handleFormSubmit = function (event) {
