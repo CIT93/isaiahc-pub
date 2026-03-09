@@ -44,15 +44,39 @@ const handleFormSubmit = function (event) {
 
     const orderData = orderHandler.getOrderInputs();
     const calculatedPrice = priceCalculator.calculateTotal(orderData);
+    const existingOrderId = orderIdInput.value;
 
-    const newOrder = {
-        id: Date.now().toString(),
-        ...orderData,
-        ...calculatedPrice,
-        timestamp: new Date().toISOString()
-    };
+    if (existingOrderId) {
+        const index = orders.findIndex(function (order) {
+            return order.id === existingOrderId;
+        });
 
-    orders.push(newOrder);
+        if (index !== -1) {
+            orders[index] = {
+                ...orders[index],
+                ...orderData,
+                ...calculatedPrice
+            };
+        } else {
+            const newOrder = {
+                id: Date.now().toString(),
+                ...orderData,
+                ...calculatedPrice,
+                timestamp: new Date().toISOString()
+            };
+
+            orders.push(newOrder);
+        }
+    } else {
+        const newOrder = {
+            id: Date.now().toString(),
+            ...orderData,
+            ...calculatedPrice,
+            timestamp: new Date().toISOString()
+        };
+
+        orders.push(newOrder);
+    }
 
     orderStorage.saveOrders(orders);
 
@@ -62,6 +86,7 @@ const handleFormSubmit = function (event) {
     });
 
     orderHandler.clearOrderForm();
+    orderIdInput.value = '';
 };
 
 const handleClearData = function () {
@@ -71,6 +96,8 @@ const handleClearData = function () {
         onDelete: handleDelete,
         onEdit: handleEdit
     });
+    orderHandler.clearOrderForm();
+    orderIdInput.value = '';
 };
 
 const init = function () {
